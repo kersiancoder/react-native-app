@@ -1,10 +1,25 @@
-import { Button, StyleSheet, TextInput, View } from 'react-native';
+import { Button, StyleSheet, TextInput, View } from "react-native";
+import React, { useState } from "react"
 
 export default function App() {
+  const [task, setTask] = useState("");
+  
+  const onHandlerChange = (text) => {
+    setTask(text)
+  }
+  
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
-        <TextInput style={styles.input} placeholder="Add a new task" />
+        <TextInput 
+          style={styles.input} 
+          placeholder="Add a new task"
+          autoComplete="off"
+          autoCorrect={false}
+          autoCapitalize="none"
+          value={task}
+          onChangeText={onHandlerChange}
+          />
         <Button style={styles.inputButton} title="Add" />      
       </View>
     </View>
@@ -14,7 +29,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   inputContainer: {
     flexDirection: "row",
