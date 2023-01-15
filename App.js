@@ -1,4 +1,4 @@
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import { Button, FlatList, StyleSheet, Text, TextInput, View } from "react-native";
 import React, { useState } from "react"
 
 export default function App() {
@@ -19,11 +19,20 @@ export default function App() {
     ]);
     setTask("");
   }
+
+  const renderItem = ({ item}) => (
+    <View style={styles.itemContainer}>
+      <Text style={styles.itemList}>{item.value}</Text>
+    </View>
+  )
+
+  const keyExtractor = (item) => item.id;
   
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
-        <TextInput style={styles.input} 
+        <TextInput
+          style={styles.input} 
           placeholder="Add a new task"
           autoComplete="off"
           autoCorrect={false}
@@ -31,21 +40,20 @@ export default function App() {
           value={task}
           onChangeText={onHandlerChange}
           />
-        <Button style={styles.inputButton}
+        <Button
+          style={styles.inputButton}
           disabled={!task}
           title="Add"
           onPress={onHandlerSubmit} 
         />
       </View>
-      <View style={styles.listContainer}>
-        {
-          tasks.map((item) => (
-            <View key={item.id} style={styles.itemContainer}>
-              <Text style={styles.itemList}>{item.value}</Text>
-            </View>
-          ))
-        }
-      </View>
+      <FlatList
+        style={styles.listContainer}
+        data={tasks}
+        renderItem={renderItem}
+        keyExtractor={keyExtractor}
+        showsVerticalScrollIndicator={false}
+      />
     </View>
   );
 }
