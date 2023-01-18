@@ -1,7 +1,6 @@
 import React from "react"
 import { Modal, Button, View, Text } from "react-native"
 import { styles } from "./styles"
-import { useState } from "react"
 
 const AddModal = ({ 
     isModalVisible, 

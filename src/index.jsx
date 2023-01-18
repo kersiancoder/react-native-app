@@ -1,6 +1,6 @@
-import { FlatList, Text, TouchableOpacity, View } from "react-native";
+import { View } from "react-native";
 import React, { useState } from "react"
-import { AddItem, AddModal } from "./components"
+import { AddItem, AddModal, TaskList } from "./components"
 import { colors } from "./constants/theme/colors"
 
 
@@ -34,14 +34,6 @@ const App = () => {
     setSelectedTask(item);
   }
 
-  const renderItem = ({ item}) => (
-    <TouchableOpacity style={styles.itemContainer} onPress={() => onHandlerModal(item)}>
-      <Text style={styles.itemList}>{item.value}</Text>
-    </TouchableOpacity>
-  )
-
-  const keyExtractor = (item) => item.id;
-
   const onHandleCancel = () => {
     setIsModalVisible(!isModalVisible);
     setSelectedTask(null);
@@ -62,12 +54,9 @@ const App = () => {
       placeholder="Add a new task"
       task={task}
       />
-      <FlatList
-        style={styles.listContainer}
-        data={tasks}
-        renderItem={renderItem}
-        keyExtractor={keyExtractor}
-        showsVerticalScrollIndicator={false}
+      <TaskList
+        tasks={tasks}
+        onHandlerModal={onHandlerModal}
       />
       <AddModal
       isModalVisible={isModalVisible}
