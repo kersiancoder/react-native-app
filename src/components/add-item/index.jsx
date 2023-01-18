@@ -22,7 +22,6 @@ const AddItem = ({
           onChangeText={onHandlerChange}
           />
         <Button
-          style={styles.inputButton}
           disabled={!task}
           title={buttonText}
           color={buttonColor}

@@ -1,6 +1,6 @@
-import { Button, FlatList, Modal, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import React, { useState } from "react"
-import { AddItem } from "./components"
+import { AddItem, AddModal } from "./components"
 import { colors } from "./constants/theme/colors"
 
 
@@ -69,27 +69,12 @@ const App = () => {
         keyExtractor={keyExtractor}
         showsVerticalScrollIndicator={false}
       />
-      <Modal visible={isModalVisible} animationType="slide">
-        <View style={styles.modalContainer}>
-          <Text style={styles.modalTitle}>Task Detail</Text>
-          <View style={styles.modalDetailContainer}>
-            <Text style={styles.modalDetailMessage}>Are you sure to delete this item?</Text>
-            <Text style={styles.selectedTask}>{selectedTask?.value}</Text>
-          </View>
-          <View style={styles.modalButtonContainer}>
-            <Button
-              title="Cancel"
-              color="#2196f3"
-              onPress={onHandleCancel}
-            />
-            <Button
-              title="Delete"
-              color="red"
-              onPress={onHandleDelete}
-            />
-          </View>
-        </View>
-      </Modal>
+      <AddModal
+      isModalVisible={isModalVisible}
+      selectedTask={selectedTask}
+      onHandleCancel={onHandleCancel}
+      onHandleDelete={onHandleDelete}
+      />
     </View>
   );
 }
